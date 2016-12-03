@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회뭔 종류 선택</title>
+
+<script type="text/javascript">
+
+function CreateNormalMember() {
+	location.href = "NormalMemberCreateView.html";	   
+}
+
+function CreateEmployeeMember() {
+	location.href = "EmployeeMemberCreateView.html";	   
+}
+
+
+</script>
+</head>
+<body>
+
+<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원 종류 선택</h6>
+
+<h3>회원 정보 등록 (회원가입)</h3>
+<div>
+	
+	
+	
+	<div style="float:left" width=440 height =1080>
+	<img src= "../img/memberCreateView.jpg" height=500>
+	</div>
+	<div>
+		<h3> 회원 종류 선택 </h3>
+		<hr>
+		<input type="button" value= "일반회원" id=normalMemberBtn onclick= "CreateNormalMember()">
+		<input type="button" value= "직원" id=employeeMemberBtn onclick= "CreateEmployeeMember()">
+	</div>
+</div>
+
+</body>
+</html>
