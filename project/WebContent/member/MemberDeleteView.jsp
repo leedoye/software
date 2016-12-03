@@ -11,19 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<SCRIPT type="text/javascript" src="../js/function.js"></SCRIPT>
 
-
-<script type="text/javascript">
-	function deleteBtn()
-	{
-		
-		var password = document.getElementById(password);
-		
-		alert(id);
-		alert(password);
-	}
-
-</script>
 </head>
 <body>
 
@@ -69,7 +58,7 @@
 			</tr>
 		</table>
 		<div align = right>
-			<input type="button" id=memberDeleteBtn value="삭제" onclick="deleteBtn()">
+			<input type="button" id=memberDeleteBtn value="삭제" onclick="memberDeleteBtn()">
 			<input type="button" id=cancleBtn value="취소">
 		</div>
 	</fieldset>

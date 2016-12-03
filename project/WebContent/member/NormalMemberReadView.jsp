@@ -18,22 +18,27 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
+<SCRIPT src="../js/function.js"></SCRIPT>
 
-function modifyBtn() {
-	location.href = "NormalMemberUpdateView.jsp";
-}
-
-function deleteBtn() {
-	location.href = "MemberDeleteView.jsp";
-}
-</script>
 </head>
 <body>
 <header>
 	<%
+		
+	
 		mem = (project.member.MemberData) session.getAttribute("member");
-		int isLogin =  (int) session.getAttribute("login");
+		Integer o = (Integer) session.getAttribute("login");
+		Integer isLogin = -1 ;
+		
+		
+		if ( o != null )
+		{
+			
+			isLogin = (Integer)session.getAttribute("login");
+		}
+		
+		
+		
 		if ( isLogin == 0 || isLogin == 1) {
 	%>
 	<div align="right">
@@ -44,17 +49,24 @@ function deleteBtn() {
 	
 	
 			</tr>
+			<form action="../member/logout.jsp">
 			<tr align=center>
-				<td colspan=3 ><input class="myButton" type="submit" value="로그아웃"></td>
-				
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
+			</form>
+			<form action="../member/NormalMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
 			</tr>
+			
 		</table>
 	</div>
 	<%}
 		else {
 	%>
 		<div align="right">
+		
 		<table>
+		<form action="../member/loginView2.jsp">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="ID"></td>
@@ -62,8 +74,11 @@ function deleteBtn() {
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" name="password"></td>
+				<td><input type="password" name="password"></td>
+		</form>
+		<form action="../member/MemberTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
+		</form>
 			</tr>
 		</table>
 	</div>
@@ -196,9 +211,9 @@ function deleteBtn() {
 		</tr>
 	</table>
 	</nav>
-<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원정보 조회</h6>
+<h6 class=subTitle> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원정보 조회</h6>
 
-<h3>회원 정보 조회</h3>
+<h3 class=mainTitle>회원 정보 조회</h3>
 
 <%
 	
@@ -285,8 +300,8 @@ function deleteBtn() {
 		</table>
 		</fieldset>
 		<div align=right>
-			<input type="button" id=NormalMemberUpdateBtn value="수정" onclick="modifyBtn()">
-			<input type="button" id=MemberDeleteBtn value="삭제" onclick="deleteBtn()">
+			<input type="button" class=myButton id=NormalMemberUpdateBtn value="수정" onclick="normalMemberUpdateBtn()">
+			<input type="button" class=myButton id=MemberDeleteBtn value="삭제" onclick="memberDeleteBtn()">
 		</div>
 		</form>
 	</div>

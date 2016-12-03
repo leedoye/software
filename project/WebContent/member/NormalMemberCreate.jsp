@@ -18,11 +18,12 @@
 	{
 		info.memberID = "E" + memberControl.eCount++;
 	}
-	out.println(info.password);
+	
 	memberControl.insertNormalMember(info);
 %>
 <script>
                alert("회원가입 성공!");
+               location.href="../main/mainView.jsp";
                
 </script>
 </body>

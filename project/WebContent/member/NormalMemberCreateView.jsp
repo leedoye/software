@@ -8,28 +8,38 @@
 <html>
 <head>
 
- <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-
-    <title>Signin Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap-theme.css" />
+<link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
+<title>Insert title here</title>
+<SCRIPT type="text/javascript" src="../js/function.js"></SCRIPT>
+
 </head>
 <body>
 
 <header>
 	<%
+		
+	
 		mem = (project.member.MemberData) session.getAttribute("member");
-		int isLogin =  (int) session.getAttribute("login");
+		Integer o = (Integer) session.getAttribute("login");
+		Integer isLogin = -1 ;
+		
+		
+		if ( o != null )
+		{
+			
+			isLogin = (Integer)session.getAttribute("login");
+		}
+		
+		
+		
 		if ( isLogin == 0 || isLogin == 1) {
 	%>
 	<div align="right">
@@ -40,17 +50,24 @@
 	
 	
 			</tr>
+			<form action="../member/logout.jsp">
 			<tr align=center>
-				<td colspan=3 ><input class="myButton" type="submit" value="로그아웃"></td>
-				
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
+			</form>
+			<form action="../member/NormalMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
 			</tr>
+			
 		</table>
 	</div>
 	<%}
 		else {
 	%>
 		<div align="right">
+		
 		<table>
+		<form action="../member/loginView2.jsp">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="ID"></td>
@@ -58,8 +75,11 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" name="password"></td>
+				<td><input type="password" name="password"></td>
+		</form>
+		<form action="../member/MemberTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
+		</form>
 			</tr>
 		</table>
 	</div>
@@ -193,29 +213,28 @@
 	</table>
 	</nav>
 
-<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원정보 등록</h6>
+<h6 class=subTitle> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원정보 등록</h6>
 
-<h3>회원 정보 등록 (회원가입)</h3>
+<h3 class=mainTitle>회원 정보 등록 (회원가입)</h3>
 
 <div width=1440 height=1080>
 	<div style="float:left" width=440>
-	<img src= "img/memberCreateView.jpg" height=500>
+	<img src= "../image/memberCreateView.jpg" height=500>
 	</div>
 	
 	<div width=1000 >
-		<form id=memberCreateForm action=NormalMemberCreateView.jsp method=post >
+		<form id=memberCreateForm action=NormalMemberCreate.jsp method=post >
 		<fieldset >
 		<legend>개인정보입력(회원)</legend>
 		<table id=memberCreateTable>
 			<tr >
 				<td colspan=3>회원정보입력</td>
 				<td></td>
-				<td></td>
 			</tr>
 			<tr>
 				<td>*로그인 아이디</td>
-				<td> <input type ="text"  name=ID > <input type="button" id=idCheck value="중복체크"></td>
-				<td> </td>
+				<td> <input type ="text"  name=ID ></td>
+				<td> <input type="button" class=myButton id=idCheck value="중복체크"> </td>
 				<td> </td>
 			</tr>
 			<tr>
@@ -239,29 +258,25 @@
 			<tr>
 				<td >*거주지주소</td>
 				<td colspan=3 > <input type="text" name=address style="width:500px; " ></td>
-				<td></td>
-				<td></td>
+				
 			</tr>
 			<tr>
 				<td>*이메일</td>
-				<td colspan=2> <input type="text" name=email >
-					<SELECT id="emailList">
+				<td colspan=2> <input type="text" name=email style="width:300px; " >
+					
+				</td>
+				<td><SELECT id="emailList">
 						<OPTION selected>직접입력</OPTION>
 						<OPTION >naver.com</OPTION>
 						<OPTION>daum.net</OPTION>
 						<OPTION>gmail.com</OPTION>
-					</SELECT>
-				</td>
-				<td></td>
-				<td>
-					
-				</td>
+					</SELECT></td>
+				
 			</tr>
 			<tr>
 				<td>*휴대폰 번호</td>
-				<td > <input type="text" name=phoneNo  style="width:50px; " ></td>
-				<td></td>
-				<td></td>
+				<td colspan=3> <input type="text" name=phoneNo  style="width:300px; " ></td>
+				
 			</tr>
 			<tr>
 				<td>근무회사명</td>
@@ -287,17 +302,24 @@
 				<td></td>
 				<td></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td><input type="checkbox" id=personalInformationCollectionUseAgreementStatus > 개인정보 수집 이용동의</td>
+				<td></td>
+				<td><input type="checkbox" id=personalInformationOfferingAgreementStatus>개인정보 제공동의</td>
+				
+			</tr>
 		</table>
 		<div>
-			<input type="checkbox" id=personalInformationCollectionUseAgreementStatus> 개인정보 수집 이용동의
-			<input type="checkbox" id=personalInformationOfferingAgreementStatus> 개인정보 제공동의
+			 
+			 
 		</div>
 		</fieldset>
-		<input type="hidden" name=memberType value=2>
+		<input type="hidden" name=memberType value=1>
 		
 		<div align=right>
-			<input type="submit" value="확인">
-			<input type="reset" value="취소">
+			<input type="submit"  class=myButton value="확인">
+			<input type="button" class=myButton value="취소" onclick="cancleBtn()">
 		</div>
 		</form>
 	</div>

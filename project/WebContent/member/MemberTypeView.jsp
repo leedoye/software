@@ -17,36 +17,31 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../css/bootstrap-theme.css" />
-<link href="../css/mainStyle.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript">
-
-function CreateNormalMember() {
-	location.href = "NormalMemberCreateView.html";	   
-}
-
-function CreateEmployeeMember() {
-	location.href = "EmployeeMemberCreateView.html";	   
-}
+<link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
+<SCRIPT type="text/javascript" src="../js/function.js"></SCRIPT>
 
 
-</script>
 </head>
 <body>
 
 
 <header>
 	<%
-		mem = (project.member.MemberData) session.getAttribute("member");
-	Integer o = (Integer) session.getAttribute("login");
-	Integer isLogin = -1 ;
-	
-	
-	if ( o != null )
-	{
 		
-		isLogin = (Integer)session.getAttribute("login");
-	}
+	
+		mem = (project.member.MemberData) session.getAttribute("member");
+		Integer o = (Integer) session.getAttribute("login");
+		Integer isLogin = -1 ;
+		
+		
+		if ( o != null )
+		{
+			
+			isLogin = (Integer)session.getAttribute("login");
+		}
+		
+		
+		
 		if ( isLogin == 0 || isLogin == 1) {
 	%>
 	<div align="right">
@@ -57,17 +52,24 @@ function CreateEmployeeMember() {
 	
 	
 			</tr>
+			<form action="../member/logout.jsp">
 			<tr align=center>
-				<td colspan=3 ><input class="myButton" type="submit" value="로그아웃"></td>
-				
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
+			</form>
+			<form action="../member/NormalMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
 			</tr>
+			
 		</table>
 	</div>
 	<%}
 		else {
 	%>
 		<div align="right">
+		
 		<table>
+		<form action="../member/loginView2.jsp">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="ID"></td>
@@ -75,8 +77,11 @@ function CreateEmployeeMember() {
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" name="password"></td>
+				<td><input type="password" name="password"></td>
+		</form>
+		<form action="../member/MemberTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
+		</form>
 			</tr>
 		</table>
 	</div>
@@ -209,22 +214,25 @@ function CreateEmployeeMember() {
 		</tr>
 	</table>
 	</nav>
-	
-<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원 종류 선택</h6>
 
-<h3>회원 정보 등록 (회원가입)</h3>
+<div >
+<h6 class=subTitle > 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원 종류 선택</h6>
+</div>
+<div >
+<h3 class=mainTitle >회원 정보 등록 (회원가입)</h3>
+</div>
 <div>
 	
 	
 	
 	<div style="float:left" width=440 height =1080>
-	<img src= "../img/memberCreateView.jpg" height=500>
+	<img src= "../image/memberCreateView.jpg" height=500>
 	</div>
 	<div>
 		<h3> 회원 종류 선택 </h3>
 		<hr>
-		<input type="button" value= "일반회원" id=normalMemberBtn onclick= "CreateNormalMember()">
-		<input type="button" value= "직원" id=employeeMemberBtn onclick= "CreateEmployeeMember()">
+		<input type="button" value= "일반회원" class=myButton id=normalMemberBtn onclick= "CreateNormalMember()">
+		<input type="button" value= "직원" class=myButton id=employeeMemberBtn onclick= "CreateEmployeeMember()">
 	</div>
 </div>
 

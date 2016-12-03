@@ -50,9 +50,13 @@
 			</tr>
 			<form action="../member/logout.jsp">
 			<tr align=center>
-				<td colspan=3 ><input class="myButton" type="submit" value="로그아웃"></td>
-			</tr>
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
 			</form>
+			<form action="../member/NormalMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
+			</tr>
+			
 		</table>
 	</div>
 	<%}
