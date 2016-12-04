@@ -1,32 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="memberControl" class="project.member.MemberControl" />
+     <jsp:useBean id="memberControl" class="project.member.MemberControl" />
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
-   <jsp:useBean id="mem" class="project.member.MemberData" />
-<jsp:setProperty name="nor" property="*" />
+   <jsp:useBean id="mem" class="project.member.MemberData"/>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="../css/bootstrap-theme.css" />
-<link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
-
+<meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<SCRIPT src="../js/function.js"></SCRIPT>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap-theme.css" />
+<link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
+<SCRIPT type="text/javascript" src="../js/function.js"></SCRIPT>
+
 
 </head>
 <body>
+
+
 <header>
 	<%
 		
 	
-		nor = (project.member.NormalMemberData) session.getAttribute("member");
+		mem = (project.member.MemberData) session.getAttribute("member");
 		Integer o = (Integer) session.getAttribute("login");
 		Integer isLogin = -1 ;
 		
@@ -44,7 +47,7 @@
 	<div align="right">
 		<table clsss="innor" id="innor">
 			<tr align=center>
-				<td colspan=3> <%= nor.name %> <% out.println( "( " + nor.ID + " ) 환영합니다.") ;%></td>
+				<td colspan=3> <%= mem.name %> <% out.println( "( " + mem.ID + " ) 환영합니다.") ;%></td>
 				
 	
 	
@@ -211,100 +214,22 @@
 		</tr>
 	</table>
 	</nav>
-<h6 class=subTitle> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원정보 조회</h6>
 
-<h3 class=mainTitle>회원 정보 조회</h3>
+<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 실명 인증 종류 선택</h6>
 
-<%
+<h3>회원 정보 등록 (회원가입)</h3>
+<div>
 	
-	nor = (project.member.NormalMemberData) session.getAttribute("member");
-
-%>
-
-<div >
-	<div >
-		<form id=NormalMemberReadForm >
-		<fieldset >
-		<legend>회원정보</legend>
-		<table id=NormalMemberReadTable>
-			<tr>
-				<td> 회원 번호</td>
-				<td> <%= nor.memberID %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>로그인 아이디</td>
-				<td> <%= nor.ID %></td>
-				<td> </td>
-				<td> </td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td> <%= nor.password %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-			<tr>
-				<td>성명</td>
-				<td> <%=nor.name %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td >거주지주소</td>
-				<td colspan=3 > <%=nor.address %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td colspan=2> <%=nor.email %>
-					
-				</td>
-				<td></td>
-				<td>
-					
-				</td>
-			</tr>
-			<tr>
-				<td>휴대폰 번호</td>
-				<td > <%= nor.phoneNo %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>근무회사명</td>
-				<td> <%= nor.centerName %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>부서명</td>
-				<td> <%= nor.department %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>직위</td>
-				<td> <%= nor.position %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>직무</td>
-				<td> <%= nor.duty %></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
-		</fieldset>
-		<div align=right>
-			<input type="button" class=myButton id=NormalMemberUpdateBtn value="수정" onclick="normalMemberUpdateBtn()">
-			<input type="button" class=myButton id=MemberDeleteBtn value="삭제" onclick="memberDeleteBtn()">
-		</div>
-		</form>
+	<div style="float:left" width=440 height =1080>
+	<img src= "../image/memberCreateView.jpg" height=500>
+	</div>
+	<div>
+		<h3> 실명인증선택 </h3>
+		<hr>
+		<input type="button" value= "아이핀 인증" class=myButton id=normalMemberBtn onclick="getMemberType()">
+		<input type="button" value= "휴대폰 인증" class=myButton id=employeeMemberBtn onclick="getMemberType()">
 	</div>
 </div>
+
 </body>
 </html>

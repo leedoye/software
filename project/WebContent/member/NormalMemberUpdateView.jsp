@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<% request.setCharacterEncoding("UTF-8"); %>
 	<jsp:useBean id="memberControl" class="project.member.MemberControl" />
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
    <jsp:useBean id="mem" class="project.member.MemberData"/>
+   <jsp:setProperty name="nor" property="*" />
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,7 +78,7 @@
 				<td>비밀번호</td>
 				<td><input type="password" name="password"></td>
 		</form>
-		<form action="../member/MemberTypeView.jsp">
+		<form action="../member/RealNameAuthenticationTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
 		</form>
 			</tr>
@@ -225,7 +227,7 @@
 <div width=1440 height=1080>
 	
 	<div width=1000 >
-		<form id=memberCreateForm >
+		<form id=memberCreateForm action="NormalMemberUpdate.jsp" method=post >
 		<fieldset >
 		<legend>비밀번호변경</legend>
 		<table id=memberUpdateTable>
@@ -236,19 +238,19 @@
 			</tr>
 			<tr>
 				<td>회원 아이디</td>
-				<td> <input type="text" id=name value=<%=nor.ID %>> </td>
+				<td> <input type="text" name=ID value=<%=nor.ID %>> </td>
 				<td> </td>
 				<td> </td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td> <input type="password" id=password ></td>
+				<td> <input type="password" name="password" ></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>비밀번호확인</td>
-				<td> <input type="password" id=checkPassword ></td>
+				<td> <input type="password" name=checkPassword ></td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -259,19 +261,19 @@
 		<table>
 			<tr>
 				<td>*성명</td>
-				<td> <input type="text" id=name value=<%=nor.name %>></td>
+				<td> <input type="text" name=name value=<%=nor.name %>> </td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td >*거주지주소</td>
-				<td colspan=3 > <input type="text" id=address style="width:500px; " value= <%= nor.address %>></td>
+				<td colspan=3 > <input type="text" name=address style="width:500px; " value= <%= nor.address %>></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>*이메일</td>
-				<td colspan=2> <input type="text" id=email style="width:300px; " value=<%= nor.email %>  >
+				<td colspan=2> <input type="text" name=email style="width:300px; " value=<%= nor.email %>  >
 					
 				</td>
 				<td><SELECT id="emailList">
@@ -286,31 +288,31 @@
 			</tr>
 			<tr>
 				<td>*휴대폰 번호</td>
-				<td > <input type="text" id=phoneNo  style="width:300px; " value=<%=nor.phoneNo %> > </td>
+				<td > <input type="text" name=phoneNo  style="width:300px; " value=<%=nor.phoneNo %> > </td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>근무회사명</td>
-				<td> <input type="text" id=company value=<%=nor.centerName %> ></td>
+				<td> <input type="text" name=centerName value=<%=nor.centerName %> ></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>부서명</td>
-				<td> <input type="text" id=department value=<%=nor.department %>></td>
+				<td> <input type="text" name=department value=<%=nor.department %>></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>직위</td>
-				<td> <input type="text" id=position  value=<%= nor.position %>></td>
+				<td> <input type="text" name=position  value=<%= nor.position %>></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>직무</td>
-				<td> <input type="text" id=duty value=<%= nor.duty %>></td>
+				<td> <input type="text" name=duty value=<%= nor.duty %>></td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -318,7 +320,7 @@
 		
 		</fieldset>
 		<div align=right>
-			<input type="submit" class=myButton value="수정">
+			<input type="submit" class=myButton value="수정" >
 			<input type="button"  class=myButton value="취소" onclick="cancleBtn()">
 		</div>
 		</form>

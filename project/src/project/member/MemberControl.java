@@ -225,11 +225,15 @@ public class MemberControl {
 	
 	public void delete(String memberID)
 	{
+		if (memberID == null )
+			return ;
+		
 		try {
 			
 			
 			String deleteQuery = "delete from `"+ dbTable +"` where memberID = ? ";
 			
+			System.out.println(memberID);
 			 pstmt = con.prepareStatement(deleteQuery); 
 			 pstmt.setString(1,memberID);
 			 
@@ -244,19 +248,10 @@ public class MemberControl {
 	   
 	}
 	
-	public void update(MemberData m)
+	public void updateNormalMember(NormalMemberData m)
 	{
 		
 		try {
-			
-			if ( m.memberID.charAt(0) == 'E' || m.memberID.charAt(0) == 'A')
-			{
-				
-			}
-			else
-			{
-				
-			}
 			
 			String sql = "select memberID from memberdata where memberID = ?";
 			
@@ -300,11 +295,26 @@ public class MemberControl {
 					pstmt.setString(9,m.address);
 					pstmt.setString(10,m.memberID);
 					
-		
+					
+								
 					int count = pstmt.executeUpdate();
 					
 					System.out.println(count);
 					
+					String updateNormalMemberQuery = "update normalmemberdata set centerName = ?, department = ?"
+							+ ", duty = ?, position = ?  where memberID = ? ";
+					pstmt.close();
+					
+					pstmt = con.prepareStatement(updateNormalMemberQuery);
+					
+					pstmt.setString(1,m.centerName);
+					pstmt.setString(2,m.department);
+					pstmt.setString(3,m.duty);
+					pstmt.setString(4,m.position);
+					pstmt.setString(5,m.memberID);
+					
+					count = pstmt.executeUpdate();
+					System.out.println(count);
 					System.out.println("변경완료");
 				}
 			}
@@ -362,6 +372,7 @@ public class MemberControl {
             	String subSql = "SELECT * FROM normalmemberdata where memberID = '" + memberID +"'";
             	Statement substmt = con.createStatement();
             	
+            	System.out.println(nm.memberID);
             	
             	ResultSet subRs = substmt.executeQuery(subSql);
             	
@@ -373,7 +384,7 @@ public class MemberControl {
             		nm.position = subRs.getString(5);
             	}
             	
-            	
+            	System.out.println(nm.memberID);
             	
                 
                 //여러 데이터 타입이 가능함

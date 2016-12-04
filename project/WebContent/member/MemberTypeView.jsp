@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
@@ -79,7 +79,7 @@
 				<td>비밀번호</td>
 				<td><input type="password" name="password"></td>
 		</form>
-		<form action="../member/MemberTypeView.jsp">
+		<form action="../member/RealNameAuthenticationTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
 		</form>
 			</tr>
@@ -231,8 +231,8 @@
 	<div>
 		<h3> 회원 종류 선택 </h3>
 		<hr>
-		<input type="button" value= "일반회원" class=myButton id=normalMemberBtn onclick= "CreateNormalMember()">
-		<input type="button" value= "직원" class=myButton id=employeeMemberBtn onclick= "CreateEmployeeMember()">
+		<input type="button" value= "일반회원" class=myButton id=normalMemberBtn onclick= "createNormalMember()">
+		<input type="button" value= "직원" class=myButton id=employeeMemberBtn onclick= "createEmployeeMember()">
 	</div>
 </div>
 

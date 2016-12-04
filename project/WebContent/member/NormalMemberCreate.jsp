@@ -1,12 +1,12 @@
-<%@ page contentType="text/html;charset=EUC-KR" %>
-<% request.setCharacterEncoding("EUC-KR"); %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="info" class="project.member.NormalMemberData" />
 <jsp:useBean id="memberControl" class="project.member.MemberControl" />
 <jsp:setProperty name="info" property="*" />
 <html>
-<head><title>setProperty ев╫╨ф╝</title></head>
+<head><title>setProperty М┘▄Л┼╓М┼╦</title></head>
 <body>
-<h3>setProperty ев╫╨ф╝</h3>
+<h3>setProperty М┘▄Л┼╓М┼╦</h3>
 <% String value = request.getParameter("memberType"); %>
 <%
 	if ( value.equals("1"))
@@ -22,7 +22,7 @@
 	memberControl.insertNormalMember(info);
 %>
 <script>
-               alert("х╦©Ь╟║ют ╪╨╟Ь!");
+               alert("М ▄Л⌡░Й╟─Л·┘ Л└╠ЙЁ╣!");
                location.href="../main/mainView.jsp";
                
 </script>

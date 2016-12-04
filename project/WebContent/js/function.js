@@ -1,16 +1,6 @@
 
 
 
-function memberDeleteBtn()
-{
-		
-		var password = document.getElementById(password);
-		
-		alert(id);
-		alert(password);
-}
-
-
 function createNormalMember() {
 	location.href = "NormalMemberCreateView.jsp";	   
 }
@@ -28,7 +18,6 @@ function cancleBtn()
 
 
 function normalMemberUpdateBtn() {
-	alert("test");
 	location.href = "NormalMemberUpdateView.jsp";
 }
 
@@ -36,3 +25,6 @@ function memberDeleteBtn() {
 	location.href = "MemberDeleteView.jsp";
 }
 
+function getMemberType() {
+	location.href = "MemberTypeView.jsp";	   
+}

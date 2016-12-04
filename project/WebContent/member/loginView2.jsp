@@ -7,7 +7,7 @@
 <html>
 <head>
 
- <meta charset="utf-8">
+ <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -50,7 +50,7 @@
     	        else if ( type == 1 )
     	        {
     	        	em = memberControl.selectEmployeeData(memberID);
-    	        	session.setAttribute("memberID", em);
+    	        	session.setAttribute("member", em);
     	        	session.setAttribute("login",1);
     	        
     	        }

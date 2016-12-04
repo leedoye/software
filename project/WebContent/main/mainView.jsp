@@ -30,6 +30,7 @@
 		Integer isLogin = -1 ;
 		
 		
+		
 		if ( o != null )
 		{
 			
@@ -68,14 +69,14 @@
 		<form action="../member/loginView2.jsp">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="ID"></td>
+				<td><input type="text" name="ID" value="s0001"></td>
 				<td><input class="myButton" type="submit" value="로그인"></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password" value="1234"></td>
 		</form>
-		<form action="../member/MemberTypeView.jsp">
+		<form action="../member/RealNameAuthenticationTypeView.jsp">
 				<td><input class="myButton" type="submit" value="회원가입"></td>
 		</form>
 			</tr>
