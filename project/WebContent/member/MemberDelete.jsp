@@ -1,8 +1,8 @@
-<%@page import="project.member.EmployeeData"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% request.setCharacterEncoding("UTF-8"); %>
-    	<jsp:useBean id="memberControl" class="project.member.MemberControl" />
+    <jsp:useBean id="memberControl" class="project.member.MemberControl" />
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
    <jsp:useBean id="mem" class="project.member.MemberData"/>
@@ -20,60 +20,71 @@
 
 	String password = request.getParameter("password");
 	
-	Integer islogin = (Integer) session.getAttribute("login");
+Integer islogin = (Integer) session.getAttribute("login");
+
+if ( islogin == 0 )
+{
 	
-	if ( islogin == 0 )
+	nor = (project.member.NormalMemberData) session.getAttribute("member");
+	
+	if ( password.equals(nor.password) )
 	{
-		nor = (project.member.NormalMemberData) session.getAttribute("member");
+		memberControl.delete(nor.memberID);
+		session.setAttribute("login", null);
 		
-		if ( password.equals(nor.password) )
-		{
-			memberControl.delete(nor.memberID);
-			session.setAttribute("login", null);
-			
-			%>
-				<script>
-				location.href="../main/mainView.jsp";
-				</script>
-			<%
-		}
-		else
-		{
-			%>
+		%>
 			<script>
-				alert("비밀번호가 일치하지 않습니다.");
-				history.go(-1);
+			alert("dnkdfanmdkf");
+			location.href="../main/mainView.jsp";
 			</script>
-			<%
-		}
+		<%
 	}
 	else
 	{
-		em = (project.member.EmployeeData) session.getAttribute("member");
-		if ( password.equals(em.password) )
-		{
-			memberControl.delete(em.memberID);
-			session.setAttribute("login", null);
-			
-			%>
-				<script>
-				location.href="../main/mainView.jsp";
-				</script>
-			<%
-		}
-		else
-		{
-			%>
-			<script>
-				alert("비밀번호가 일치하지 않습니다.");
-				history.go(-1);
-			</script>
-			<%
-		}
+		%>
+		<script>
+			alert("비밀번호가 일치하지 않습니다.");
+			history.go(-1);
+		</script>
+		<%
 	}
 	
-
+}
+else
+{
+	%>
+		<script>
+			alert("dnkdfanmdkf");
+			
+		</script>
 	
+	<%
+	em = (project.member.EmployeeData) session.getAttribute("member");
+	if ( password.equals(em.password) )
+	{
+		memberControl.delete(em.memberID);
+		session.setAttribute("login", null);
+		
+		%>
+			<script>
+			location.href="../main/mainView.jsp";
+			</script>
+		<%
+	}
+	else
+	{
+		%>
+		<script>
+			alert("비밀번호가 일치하지 않습니다.");
+			history.go(-1);
+		</script>
+		<%
+	}
+}
+
+
+
+
 	
 	
 	
