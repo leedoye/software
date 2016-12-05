@@ -2,27 +2,24 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="info" class="project.member.NormalMemberData" />
 <jsp:useBean id="memberControl" class="project.member.MemberControl" />
-<jsp:useBean id="em" class="project.member.EmployeeData" />
 <jsp:setProperty name="info" property="*" />
-<jsp:setProperty name="em" property="*" />
 <html>
 <head><title>setProperty 테스트</title></head>
 <body>
-
+<h3>setProperty 테스트</h3>
 <% String value = request.getParameter("memberType"); %>
 <%
-	if ( value.equals("0"))
+	if ( value.equals("1"))
 	{
 		info.memberID = "S" + memberControl.sCount++;
-		memberControl.insertNormalMember(info);
+		
 	}
 	else
 	{
-		em.memberID = "E" + memberControl.eCount++;
-		memberControl.insertEmployee(em);
+		info.memberID = "E" + memberControl.eCount++;
 	}
 	
-	
+	memberControl.insertNormalMember(info);
 %>
 <script>
                alert("회원가입 성공!");

@@ -42,14 +42,37 @@
 		
 		
 		if ( isLogin == 0 || isLogin == 1) {
+	if (mem.memberID.charAt(0) == 'E' || mem.memberID.charAt(0) == 'A')
+			{
+				
+			
 	%>
 	<div align="right">
 		<table clsss="innor" id="innor">
 			<tr align=center>
 				<td colspan=3> <%= mem.name %> <% out.println( "( " + mem.ID + " ) 환영합니다.") ;%></td>
 				
-	
-	
+			</tr>
+			<form action="../member/logout.jsp">
+			<tr align=center>
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
+			</form>
+			<form action="../member/EmployeeMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
+			</tr>
+			
+		</table>
+	</div>
+	<%		}
+			else
+			{
+				%>
+	<div align="right">
+		<table clsss="innor" id="innor">
+			<tr align=center>
+				<td colspan=3> <%= mem.name %> <% out.println( "( " + mem.ID + " ) 환영합니다.") ;%></td>
+				
 			</tr>
 			<form action="../member/logout.jsp">
 			<tr align=center>
@@ -62,7 +85,9 @@
 			
 		</table>
 	</div>
-	<%}
+				<%
+			}
+		}
 		else {
 	%>
 		<div align="right">
@@ -316,7 +341,7 @@
 			 
 		</div>
 		</fieldset>
-		<input type="hidden" name=memberType value=1>
+		<input type="hidden" name=memberType value=0>
 		
 		<div align=right>
 			<input type="submit"  class=myButton value="확인">

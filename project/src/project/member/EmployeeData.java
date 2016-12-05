@@ -1,13 +1,13 @@
 package project.member;
 
-import java.sql.Blob;
+
 
 public class EmployeeData extends MemberData{
 
 	public String memberID;
 	public String centerDepartmentName;
 	public String joinedDate;
-	public Blob profilePhoto;
+	public String profilePhoto;
 	public String enName;
 	public String positionName;
 	
@@ -31,10 +31,10 @@ public class EmployeeData extends MemberData{
 	public void setJoinedDate(String joinedDate) {
 		this.joinedDate = joinedDate;
 	}
-	public Blob getProfilePhoto() {
+	public String getProfilePhoto() {
 		return profilePhoto;
 	}
-	public void setProfilePhoto(Blob profilePhoto) {
+	public void setProfilePhoto(String profilePhoto) {
 		this.profilePhoto = profilePhoto;
 	}
 	public String getEnName() {

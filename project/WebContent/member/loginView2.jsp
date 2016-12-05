@@ -46,13 +46,17 @@
     	        	nor = memberControl.selectNormalMember(memberID);
     	        	session.setAttribute("member", nor);
     	        	session.setAttribute("login", 0);
+    	        	
+    	        	
+    	        	
+    	        	
     	        }
     	        else if ( type == 1 )
     	        {
     	        	em = memberControl.selectEmployeeData(memberID);
     	        	session.setAttribute("member", em);
     	        	session.setAttribute("login",1);
-    	        
+    	        	
     	        }
     	        
     		%>
@@ -62,6 +66,7 @@
     			
     		</Script>
     		<%
+    		
     	}
     	else
     	{

@@ -1,35 +1,33 @@
+<%@page import="project.member.EmployeeData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <jsp:useBean id="memberControl" class="project.member.MemberControl" />
+    <% request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean id="memberControl" class="project.member.MemberControl" />
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
-   <jsp:useBean id="mem" class="project.member.MemberData"/>
-   
+   <jsp:useBean id="mem" class="project.member.MemberData" />
+<jsp:setProperty name="nor" property="*" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="../css/bootstrap-theme.css" />
 <link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
-<SCRIPT type="text/javascript" src="../js/function.js"></SCRIPT>
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<SCRIPT src="../js/function.js"></SCRIPT>
 
 </head>
 <body>
-
-
 <header>
 	<%
 		
 	
-		nor = (project.member.NormalMemberData) session.getAttribute("member");
+		em = (project.member.EmployeeData) session.getAttribute("member");
 		Integer o = (Integer) session.getAttribute("login");
 		Integer isLogin = -1 ;
 		
@@ -43,7 +41,7 @@
 		
 		
 		if ( isLogin == 0 || isLogin == 1) {
-			if (nor.memberID.charAt(0) == 'E' || nor.memberID.charAt(0) == 'A')
+			if (em.memberID.charAt(0) == 'E' || em.memberID.charAt(0) == 'A')
 			{
 				
 			
@@ -51,7 +49,7 @@
 	<div align="right">
 		<table clsss="innor" id="innor">
 			<tr align=center>
-				<td colspan=3> <%= nor.name %> <% out.println( "( " + nor.ID + " ) 환영합니다.") ;%></td>
+				<td colspan=3> <%= em.name %> <% out.println( "( " + em.ID + " ) 환영합니다.") ;%></td>
 				
 			</tr>
 			<form action="../member/logout.jsp">
@@ -72,7 +70,7 @@
 	<div align="right">
 		<table clsss="innor" id="innor">
 			<tr align=center>
-				<td colspan=3> <%= nor.name %> <% out.println( "( " + nor.ID + " ) 환영합니다.") ;%></td>
+				<td colspan=3> <%= em.name %> <% out.println( "( " + em.ID + " ) 환영합니다.") ;%></td>
 				
 			</tr>
 			<form action="../member/logout.jsp">
@@ -239,20 +237,216 @@
 		</tr>
 	</table>
 	</nav>
+<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 직원정보 조회</h6>
 
-<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 실명 인증 종류 선택</h6>
+<h3>직원 정보 조회 </h3>
 
-<h3>회원 정보 등록 (회원가입)</h3>
-<div>
+<div >
 	
-	<div style="float:left" width=440 height =1080>
-	<img src= "../image/memberCreateView.jpg" height=500>
-	</div>
-	<div>
-		<h3> 실명인증선택 </h3>
-		<hr>
-		<input type="button" value= "아이핀 인증" class=myButton id=normalMemberBtn onclick="getMemberType()">
-		<input type="button" value= "휴대폰 인증" class=myButton id=employeeMemberBtn onclick="getMemberType()">
+	<div  >
+		<form id=EmployeeMemberReadForm >
+		<fieldset >
+		<legend>직원정보</legend>
+		<table id=EmployeeMemberReadTable>
+			<tr >
+				<td >직원번호</td>
+				<td> <%= em.memberID %> </td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>*로그인 아이디</td>
+				<td> <%= em.ID %> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>*비밀번호</td>
+				<td> <input type="password" id=password ></td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>*비밀번호확인</td>
+				<td> <input type="password" id=checkPassword ></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		</fieldset>
+		
+		<fieldset id=contact>
+		<legend>연락처 정보 입력</legend>
+		<table>
+		
+			<tr>
+				<td>*한글성명</td>
+				<td> <input type="text" id=name ></td>
+				<td>*영문 성명</td>
+				<td> <input type="text" id=enName ></td>
+			</tr>
+			<tr>
+				<td>*주민등록번호</td>
+				<td colspan=2> <input type="text" id=RRNLeft " >-<input type="text" id=RRNRight >
+				
+				</td>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>*성별</td>
+				<td colspan=2> 
+					<input type="radio" id=genderStatus name=genderStatus > 남자
+					<input type="radio" id=genderStatus name=genderStatus > 여자
+				</td>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>우편번호</td>
+				<td colspan=2> 
+					<input type="text" id=postCode1 > <input type="button" id=postCodeFind1 value="검색">
+					
+				</td>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<td >주민등록지주소</td>
+				<td colspan=3 > <input type="text" id=address style="width:500px; " ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>*우편번호</td>
+				<td colspan=2> 
+					<input type="text" id=postCode2 > <input type="button" id=postCodeFind2 value="검색">
+					
+				</td>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<td >*거주지주소</td>
+				<td colspan=3 > <input type="text" id=address style="width:500px; " ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>*집 전화번호</td>
+				<td > <input type="text" id=homePhoneNo1  style="width:50px; " > - <input type="text" id=homePhoneNo2 style="width:50px; "> - <input type="text" id=homePhoneNo3 style="width:50px; "></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>*휴대폰 번호</td>
+				<td > <input type="text" id=phoneNo1  style="width:50px; " > - <input type="text" id=phoneNo2 style="width:50px; "> - <input type="text" id=phoneNo3 style="width:50px; "></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>*비상연락 전화번호번호</td>
+				<td > <input type="text" id=emergencyContact1  style="width:50px; " > - <input type="text" id=emergencyContact2 style="width:50px; "> - <input type="text" id=emergencyContact3 style="width:50px; "></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td>*이메일</td>
+				<td colspan=2> <input type="text" id=emailLeft style="width:80px;" >@<input type="text" id=emailRight >
+					
+				</td>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			</table>
+			</fieldset>
+			
+			
+			<fieldset>
+			<legend>계좌정보입력</legend>
+			<table>
+			<tr>
+				<td>은행코드</td>
+				<td> <input type="text" id=bankCode ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>계좌번호</td>
+				<td> <input type="text" id=accountNumber ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>예금주명</td>
+				<td> <input type="text" id=accountHolder ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			</table>
+			</fieldset>
+			<fieldset>
+			<legend>추가정보입력</legend>
+			
+			
+			<table>
+			<tr>
+				<td>프로필사진</td>
+				<td> <input type="text" id=accountHolder > <input type="button" id=profilePhotoAdd value="추가"></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>근무센터명</td>
+				<td> <input type="text" id=centerName ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>강의과목명</td>
+				<td> <input type="text" id=responsibilitySubject ></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>경력명</td>
+				<td>경력 유형구분</td>
+				<td>경력설명</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>정보처리기사</td>
+				<td>자격증</td>
+				<td>-</td>
+				<td></td>
+			</tr>
+			
+			
+			
+			</table>
+			<div>
+				<input type="checkbox" id=personalInformationCollectionUseAgreementStatus> 개인정보 수집 이용동의
+				<input type="checkbox" id=personalInformationOfferingAgreementStatus> 개인정보 제공동의
+			</div>
+			</fieldset>
+			<div align=right>
+				<input type="submit" value="확인">
+				<input type="reset" value="취소">
+			</div>
+		</form>
 	</div>
 </div>
 

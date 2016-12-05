@@ -28,7 +28,7 @@
 	<%
 		
 	
-		mem = (project.member.MemberData) session.getAttribute("member");
+		nor = (project.member.NormalMemberData) session.getAttribute("member");
 		Integer o = (Integer) session.getAttribute("login");
 		Integer isLogin = -1 ;
 		
@@ -42,14 +42,37 @@
 		
 		
 		if ( isLogin == 0 || isLogin == 1) {
+			if (nor.memberID.charAt(0) == 'E' || nor.memberID.charAt(0) == 'A')
+			{
+				
+			
 	%>
 	<div align="right">
 		<table clsss="innor" id="innor">
 			<tr align=center>
-				<td colspan=3> <%= mem.name %> <% out.println( "( " + mem.ID + " ) 환영합니다.") ;%></td>
+				<td colspan=3> <%= nor.name %> <% out.println( "( " + nor.ID + " ) 환영합니다.") ;%></td>
 				
-	
-	
+			</tr>
+			<form action="../member/logout.jsp">
+			<tr align=center>
+				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
+			</form>
+			<form action="../member/EmployeeMemberReadView.jsp">
+				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
+			</form>
+			</tr>
+			
+		</table>
+	</div>
+	<%		}
+			else
+			{
+				%>
+	<div align="right">
+		<table clsss="innor" id="innor">
+			<tr align=center>
+				<td colspan=3> <%= nor.name %> <% out.println( "( " + nor.ID + " ) 환영합니다.") ;%></td>
+				
 			</tr>
 			<form action="../member/logout.jsp">
 			<tr align=center>
@@ -62,7 +85,9 @@
 			
 		</table>
 	</div>
-	<%}
+				<%
+			}
+		}
 		else {
 	%>
 		<div align="right">

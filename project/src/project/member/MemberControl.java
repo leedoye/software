@@ -66,9 +66,10 @@ public class MemberControl {
 			pstmt.setString(10,m.email);
 			pstmt.setString(11,m.address);
 			
+			System.out.println("기본정보 등록완료");
 			pstmt.executeUpdate(); //쿼리를 실행한다.
 			
-				String employeeQuery = "INSERT INTO employeeda  ta VALUES(?, ?, ?, ?, ?, ?)";
+				String employeeQuery = "INSERT INTO employeedata  VALUES(?, ?, ?, ?, ?, ?)";
 				
 				pstmt = con.prepareStatement(employeeQuery); // prepareStatement에서 해당 sql을 미리 컴파일한다.
 				
@@ -76,8 +77,8 @@ public class MemberControl {
 				
 				pstmt.setString(1,m.memberID);
 				pstmt.setString(2,m.centerDepartmentName);
-				pstmt.setString(3,m.joinedDate);
-				pstmt.setBlob(4,m.profilePhoto);
+				pstmt.setString(3,new java.util.Date().toString());
+				pstmt.setString(4,"");
 				pstmt.setString(5,m.enName);
 				pstmt.setString(6,m.positionName);
 				
@@ -445,7 +446,7 @@ public class MemberControl {
             		em.memberID = subRs.getString(1);
             		em.centerDepartmentName = subRs.getString(2);
             		em.joinedDate = subRs.getString(3);
-            		em.profilePhoto = subRs.getBlob(4);
+            		em.profilePhoto = subRs.getString(4);
             		em.enName = subRs.getString(5);
             		em.positionName = subRs.getString(5);
             	}
@@ -513,8 +514,12 @@ public class MemberControl {
 	{
 		MemberControl m = new MemberControl();
 		MemberData m1 = new MemberData();
-		
-		m.selectNormalMember("S0000001");
+		EmployeeData m2 = new EmployeeData();
+		m2.memberID = "1112";
+		m2.centerDepartmentName = "1111";
+		m2.positionName="1234";
+		m2.enName="1234";
+		m.insertEmployee(m2);
 		
 	}
 
