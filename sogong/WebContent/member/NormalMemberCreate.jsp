@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="info" class="project.member.NormalMemberData" />
-<jsp:useBean id="memberControl" class="project.member.MemberControl" />
+<jsp:useBean id="info" class="member.NormalMemberData" />
+<jsp:useBean id="memberControl" class="member.MemberControl" />
 <jsp:setProperty name="info" property="*" />
 <html>
 <head><title>setProperty 테스트</title></head>

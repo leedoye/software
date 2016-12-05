@@ -1,4 +1,4 @@
-package project.member;
+package member;
 
 import java.sql.*;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 public class MemberControl {
 
 	static final String id = "root";
-	static final String passwd="1234";
+	static final String passwd="7942";
 	static final String driverName = "com.mysql.jdbc.Driver";
 	static final String dbURL = "jdbc:mysql://localhost:3306/software" ; // 디비 스키마 부분 다들 만들때 software
 	
@@ -66,10 +66,9 @@ public class MemberControl {
 			pstmt.setString(10,m.email);
 			pstmt.setString(11,m.address);
 			
-			System.out.println("기본정보 등록완료");
 			pstmt.executeUpdate(); //쿼리를 실행한다.
 			
-				String employeeQuery = "INSERT INTO employeedata  VALUES(?, ?, ?, ?, ?, ?)";
+				String employeeQuery = "INSERT INTO employeeda  ta VALUES(?, ?, ?, ?, ?, ?)";
 				
 				pstmt = con.prepareStatement(employeeQuery); // prepareStatement에서 해당 sql을 미리 컴파일한다.
 				
@@ -77,8 +76,8 @@ public class MemberControl {
 				
 				pstmt.setString(1,m.memberID);
 				pstmt.setString(2,m.centerDepartmentName);
-				pstmt.setString(3,new java.util.Date().toString());
-				pstmt.setString(4,"");
+				pstmt.setString(3,m.joinedDate);
+				pstmt.setBlob(4,m.profilePhoto);
 				pstmt.setString(5,m.enName);
 				pstmt.setString(6,m.positionName);
 				
@@ -109,6 +108,22 @@ public class MemberControl {
 			pstmt = con.prepareStatement(insertQuery); // prepareStatement에서 해당 sql을 미리 컴파일한다.
 			
 			//애튜리뷰트에 값을 대입함
+			System.out.println(m.memberID);
+			System.out.println(m.ID);
+			System.out.println(m.password);
+			System.out.println(m.name);
+			System.out.println(m.genderStatus);
+			System.out.println(m.truthResidence);
+			System.out.println(m.homePhoneNo);
+			System.out.println(m.phoneNo);
+			System.out.println(m.emergencyContact);
+			System.out.println(m.email);
+			System.out.println(m.address);
+			System.out.println(m.memberID);
+			System.out.println(m.centerName);
+			System.out.println(m.department);
+			System.out.println(m.duty);
+			System.out.println(m.position);
 			
 			pstmt.setString(1,m.memberID);
 			pstmt.setString(2,m.ID);
@@ -171,7 +186,7 @@ public class MemberControl {
 			e.printStackTrace();
 		}
 		
-		System.out.println("account 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력
+		System.out.println("employee 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력
 	}
 	
 	public void insertCareer(Career c)
@@ -197,7 +212,7 @@ public class MemberControl {
 			e.printStackTrace();
 		}
 		
-		System.out.println("career 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력
+		System.out.println("employee 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력
 	}
 	
 	public void insertResponsibilitySubject(ResponsibilitySubject r)
@@ -221,7 +236,7 @@ public class MemberControl {
 			e.printStackTrace();
 		}
 		
-		System.out.println("ResponsibilitySubject 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력		
+		System.out.println("employee 테이블에 새로운 레코드를 추가했습니다.");        // 성공시 메시지 출력		
 	}
 	
 	public void delete(String memberID)
@@ -446,7 +461,7 @@ public class MemberControl {
             		em.memberID = subRs.getString(1);
             		em.centerDepartmentName = subRs.getString(2);
             		em.joinedDate = subRs.getString(3);
-            		em.profilePhoto = subRs.getString(4);
+            		em.profilePhoto = subRs.getBlob(4);
             		em.enName = subRs.getString(5);
             		em.positionName = subRs.getString(5);
             	}
@@ -475,13 +490,11 @@ public class MemberControl {
 	{
 		try
         {
+			System.out.println("aaa");
 			String selectQuery = "SELECT * FROM `" + dbTable +"` where ID = '" + id + "' and password = '" + password + "'";
-			
             //질의를 할 Statement 만들기 
             stmt = con.createStatement();
-            
             rs = stmt.executeQuery(selectQuery); //조회 쿼리결과를 rs에 넣음
-            
             System.out.println("--- 테이블 student 내용 조회 ---");
             
             System.out.println(id + " " + password);
@@ -514,12 +527,8 @@ public class MemberControl {
 	{
 		MemberControl m = new MemberControl();
 		MemberData m1 = new MemberData();
-		EmployeeData m2 = new EmployeeData();
-		m2.memberID = "1112";
-		m2.centerDepartmentName = "1111";
-		m2.positionName="1234";
-		m2.enName="1234";
-		m.insertEmployee(m2);
+		
+		m.selectNormalMember("S0000001");
 		
 	}
 

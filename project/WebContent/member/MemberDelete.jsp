@@ -1,3 +1,4 @@
+<%@page import="project.member.EmployeeData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% request.setCharacterEncoding("UTF-8"); %>
@@ -19,31 +20,58 @@
 
 	String password = request.getParameter("password");
 	
-
-	nor = (project.member.NormalMemberData) session.getAttribute("member");
+	Integer islogin = (Integer) session.getAttribute("login");
 	
-	out.println(nor.memberID);
-
-	if ( password.equals(nor.password) )
+	if ( islogin == 0 )
 	{
-		memberControl.delete(nor.memberID);
-		session.setAttribute("login", null);
+		nor = (project.member.NormalMemberData) session.getAttribute("member");
 		
-		%>
+		if ( password.equals(nor.password) )
+		{
+			memberControl.delete(nor.memberID);
+			session.setAttribute("login", null);
+			
+			%>
+				<script>
+				location.href="../main/mainView.jsp";
+				</script>
+			<%
+		}
+		else
+		{
+			%>
 			<script>
-			location.href="../main/mainView.jsp";
+				alert("비밀번호가 일치하지 않습니다.");
+				history.go(-1);
 			</script>
-		<%
+			<%
+		}
 	}
 	else
 	{
-		%>
-		<script>
-			alert("비밀번호가 일치하지 않습니다.");
-			history.go(-1);
-		</script>
-		<%
+		em = (project.member.EmployeeData) session.getAttribute("member");
+		if ( password.equals(em.password) )
+		{
+			memberControl.delete(em.memberID);
+			session.setAttribute("login", null);
+			
+			%>
+				<script>
+				location.href="../main/mainView.jsp";
+				</script>
+			<%
+		}
+		else
+		{
+			%>
+			<script>
+				alert("비밀번호가 일치하지 않습니다.");
+				history.go(-1);
+			</script>
+			<%
+		}
 	}
+	
 
 	
 	

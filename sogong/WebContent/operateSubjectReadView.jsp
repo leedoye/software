@@ -1,99 +1,51 @@
-<%@page import="project.member.EmployeeData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="memberControl" class="project.member.MemberControl" />
+	pageEncoding="UTF-8"%>
+	
+	<jsp:useBean id="memberControl" class="project.member.MemberControl" />
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
    <jsp:useBean id="mem" class="project.member.MemberData" />
-<jsp:setProperty name="nor" property="*" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="../css/bootstrap-theme.css" />
-<link href="../css/innerStyle.css" type="text/css" rel="stylesheet" />
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<SCRIPT src="../js/function.js"></SCRIPT>
 
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.css" />
+
+<link href="css/innerStyle.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<header>
+	<header>
 	<%
-		
-	
-	
-		em = (project.member.EmployeeData) session.getAttribute("member");
-		Integer o = (Integer) session.getAttribute("login");
-		Integer isLogin = -1 ;
-		
-		out.println(o);		
-		if ( o != null )
-		{
-			
-			isLogin = (Integer)session.getAttribute("login");
-		}
-		
-		
-		
+		mem = (project.member.MemberData) session.getAttribute("member");
+		int isLogin =  (int) session.getAttribute("login");
 		if ( isLogin == 0 || isLogin == 1) {
-			if (em.memberID.charAt(0) == 'E' || em.memberID.charAt(0) == 'A')
-			{
-				
-			
 	%>
 	<div align="right">
-		<table clsss="innor" id="innor">
-			<tr align=center>
-				<td colspan=3> <%= em.name %> <% out.println( "( " + em.ID + " ) 환영합니다.") ;%></td>
-				
+		<table>
+			<tr>
+				<td></td>
+				<td><%= mem.name %> <% out.print( "( " + mem.ID + " )") ;%></td>
+				<td></td>
 			</tr>
-			<form action="../member/logout.jsp">
-			<tr align=center>
-				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
-			</form>
-			<form action="../member/EmployeeMemberReadView.jsp">
-				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
-			</form>
+			<tr>
+				<td>비밀번호</td>
+				<td></td>
+				<td><input class="logout" type="submit" value="로그아웃"></td>
 			</tr>
-			
 		</table>
 	</div>
-	<%		}
-			else
-			{
-				%>
-	<div align="right">
-		<table clsss="innor" id="innor">
-			<tr align=center>
-				<td colspan=3> <%= em.name %> <% out.println( "( " + em.ID + " ) 환영합니다.") ;%></td>
-				
-			</tr>
-			<form action="../member/logout.jsp">
-			<tr align=center>
-				<td colspan=1 ><input class="myButton" type="submit" value="로그아웃"></td>
-			</form>
-			<form action="../member/NormalMemberReadView.jsp">
-				<td colspan=1 ><input class="myButton" type="submit" value="마이페이지"></td>
-			</form>
-			</tr>
-			
-		</table>
-	</div>
-				<%
-			}
-		}
+	<%}
 		else {
 	%>
 		<div align="right">
-		
 		<table>
-		<form action="../member/loginView2.jsp">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="ID"></td>
@@ -101,11 +53,8 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="password"></td>
-		</form>
-		<form action="../member/RealNameAuthenticationTypeView.jsp">
+				<td><input type="text" name="password"></td>
 				<td><input class="myButton" type="submit" value="회원가입"></td>
-		</form>
 			</tr>
 		</table>
 	</div>
@@ -238,176 +187,38 @@
 		</tr>
 	</table>
 	</nav>
-<h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 직원정보 조회</h6>
+	<section>
+	<h6>교육센터통합운영관리 - 과목관리 - 운영과목관리 - 운영과목조회</h6>
+	<h3>조회 조건</h3>
+	<hr size="2" color="gray">
+	<p>
+	<div id="form">
+		<form name="input_form" class="input_form">
+			<table align="center">
+				<tr>
+					<td align="right">년도</td>
+					<td><input type="text" id="year"></td>
+					<td align="right">과정</td>
+					<td><input type="text" id="subjectProcess"></td>
+					<td><input class="myButton" type="button" value="조회"></td>
+				</tr>
 
-<h3>직원 정보 조회 </h3>
-
-<div >
-	
-	<div  >
-		<form id=EmployeeMemberReadForm >
-		<fieldset >
-		<legend>직원정보</legend>
-		<table id=EmployeeMemberReadTable>
-			<tr >
-				<td >직원번호</td>
-				<td> <%= em.memberID %> </td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>*로그인 아이디</td>
-				<td> <%= em.ID %> </td>
-				<td> </td>
-				<td> </td>
-			</tr>
-			
-		</table>
-		</fieldset>
-		
-		<fieldset id=contact>
-		<legend>연락처 정보 입력</legend>
-		<table>
-		
-			<tr>
-				<td>*한글성명</td>
-				<td> <%= em.name %></td>
-				<td>*영문 성명</td>
-				<td> <%=em.enName %></td>
-			</tr>
-			
-			<tr>
-				<td>*성별</td>
-				<td colspan=2> 
-					<input type="radio" id=genderStatus name=genderStatus 
-					<% if ( em.genderStatus == 1 ){ out.write("checked");} %>
-					> 남자
-					<input type="radio" id=genderStatus name=genderStatus <% if (em.genderStatus == 0){ out.write("checked"); }%>> 여자
-				</td>
-				
-				<td>
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<td >주민등록지주소</td>
-				<td colspan=3 > <%=em.truthResidence %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-			<tr>
-				<td >*거주지주소</td>
-				<td colspan=3 > <%=em.address %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>*집 전화번호</td>
-				<td > <%= em.homePhoneNo %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>*휴대폰 번호</td>
-				<td > <%= em.phoneNo %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>*비상연락 전화번호번호</td>
-				<td > <%=em.emergencyContact %></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-			<tr>
-				<td>*이메일</td>
-				<td colspan=2> <%=em.email %>
-					
-				</td>
-				<td></td>
-				<td>
-					
-				</td>
-			</tr>
-			
+				<tr>
+					<td align="right">과정코드</td>
+					<td><input type="text" id="subjectCode"></td>
+					<td align="right">과목코드</td>
+					<td><input type="text" id="subjectName"></td>
+					<td><input class="myButton" type="button" value="수정"></td>
+				</tr>
 			</table>
-			</fieldset>
-			
-			
-			<fieldset>
-			<legend>계좌정보입력</legend>
-			<table>
-			<tr>
-				<td>은행코드</td>
-				<td> </td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>계좌번호</td>
-				<td> <input type="text" id=accountNumber ></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-			</table>
-			</fieldset>
-			
-			<fieldset>
-			<legend>추가정보입력</legend>
-			
-			
-			<table>
-			<tr>
-				<td>프로필사진</td>
-				<td> <input type="text" id=accountHolder > <input type="button" id=profilePhotoAdd value="추가"></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>근무센터명</td>
-				<td> <input type="text" id=centerName ></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>강의과목명</td>
-				<td> <input type="text" name=subjectName ></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>경력명</td>
-				<td>경력 유형구분</td>
-				<td>경력설명</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>정보처리기사</td>
-				<td>자격증</td>
-				<td>-</td>
-				<td></td>
-			</tr>
-			
-			
-			
-			</table>
-			<div>
-				<input type="checkbox" id=personalInformationCollectionUseAgreementStatus> 개인정보 수집 이용동의
-				<input type="checkbox" id=personalInformationOfferingAgreementStatus> 개인정보 제공동의
-			</div>
-			</fieldset>
-			<div align=right>
-				 
-				<input type="button" class=myButton value="수정" onclick="employeeUpdateBtn()">
-				<input type="button" class=myButton value="삭제" onclick="memberDeleteBtn()">
-			</div>
+			<hr size="2" color="gray">
 		</form>
 	</div>
-</div>
+	<h3>운영과목편람</h3>
+	</section>
+	
+
+
 
 </body>
 </html>

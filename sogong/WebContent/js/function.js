@@ -28,7 +28,3 @@ function memberDeleteBtn() {
 function getMemberType() {
 	location.href = "MemberTypeView.jsp";	   
 }
-
-function employeeUpdateBtn() {
-	location.href = "EmployeeUpdateView.jsp";	
-}
