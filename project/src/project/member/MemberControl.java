@@ -1,6 +1,7 @@
 package project.member;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 
@@ -249,6 +250,81 @@ public class MemberControl {
 	   
 	}
 	
+	public void updateEmployee(EmployeeData m)
+	{
+try {
+			
+			String sql = "select memberID from memberdata where memberID = ?";
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, m.memberID);
+
+			
+			rs = pstmt.executeQuery();
+
+			
+			if( rs.next() )
+			{
+				
+				String rId= rs.getString("memberID");
+				
+				
+				if ( rId.equals(m.memberID)  )
+				{
+					
+					
+					//바꾸고 싶은 애트리뷰트는 set 다음에 명시된것
+					//where 애트리뷰트가 바꾸고 싶은 행을 찾는 것
+					//updateQuery = "update memberdata set 바꿀필드명 = ? where 기본PK = ?"; 
+		
+					String updateQuery = "update `"+ dbTable +"` set password = ?, name = ?"
+							+ ", genderStatus = ?, truthResidence = ?, homePhoneNo = ?, phoneNo = ?"
+							+ ", emergencyContact = ?, email = ?, address = ?  where memberID = ? ";
+					
+					pstmt = con.prepareStatement(updateQuery);
+		
+					
+					pstmt.setString(1,m.password);
+					pstmt.setString(2,m.name);
+					pstmt.setInt(3,m.genderStatus);
+					pstmt.setString(4,m.truthResidence);
+					pstmt.setString(5,m.homePhoneNo);
+					pstmt.setString(6,m.phoneNo);
+					pstmt.setString(7,m.emergencyContact);
+					pstmt.setString(8,m.email);
+					pstmt.setString(9,m.address);
+					pstmt.setString(10,m.memberID);
+					
+					
+								
+					int count = pstmt.executeUpdate();
+					
+					System.out.println(count);
+					
+					String updateNormalMemberQuery = "update employeedata set centerDepartmentName = ?"
+							+ ", enName = ?, positionName = ?  where memberID = ? ";
+					pstmt.close();
+					
+					pstmt = con.prepareStatement(updateNormalMemberQuery);
+					
+					
+					pstmt.setString(1,m.centerDepartmentName);
+					pstmt.setString(2,m.enName);
+					pstmt.setString(3,m.positionName);
+					pstmt.setString(4,m.memberID);
+					
+					count = pstmt.executeUpdate();
+					System.out.println(count);
+					System.out.println("직원정보 변경완료");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public void updateNormalMember(NormalMemberData m)
 	{
 		
@@ -469,6 +545,124 @@ public class MemberControl {
 			
 		return null;
 
+	}
+	
+	public ArrayList<Account> selectAccount(String memberID)
+	{
+		ArrayList<Account> arr = new ArrayList<Account>();
+		try
+        {
+			String selectQuery = "SELECT * FROM account where memberID = '" + memberID + "'";
+			
+            //질의를 할 Statement 만들기 
+            stmt = con.createStatement();
+            
+            rs = stmt.executeQuery(selectQuery); //조회 쿼리결과를 rs에 넣음
+            
+            System.out.println("--- 테이블 student 내용 조회 ---");
+            
+            //rs의 내용을 가져옴
+            while (rs.next())
+            {
+            	
+            	
+            	Account a = new Account() ;
+            	
+            	a.accountNumber = rs.getString(1);
+            	a.bankCode = rs.getString(2);
+            	a.memberID = rs.getString(3);
+
+            	arr.add(a);
+            }
+           
+            
+        }
+        catch (Exception e)
+        {            
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+			
+		return arr;
+	}
+	
+	public ArrayList<Career> selectCareer(String memberID)
+	{
+		ArrayList<Career> arr = new ArrayList<Career>();
+		try
+        {
+			String selectQuery = "SELECT * FROM career where memberID = '" + memberID + "'";
+			
+            //질의를 할 Statement 만들기 
+            stmt = con.createStatement();
+            
+            rs = stmt.executeQuery(selectQuery); //조회 쿼리결과를 rs에 넣음
+            
+            System.out.println("--- 테이블 student 내용 조회 ---");
+            
+            //rs의 내용을 가져옴
+            while (rs.next())
+            {
+            	
+            	
+            	Career a = new Career() ;
+            	
+            	a.careerNo = rs.getInt(1);
+            	a.careerType = rs.getInt(2);
+            	a.career = rs.getString(3);
+            	a.careerName = rs.getString(4);
+            	a.memberID = rs.getString(5);
+
+            	arr.add(a);
+            }
+           
+            
+        }
+        catch (Exception e)
+        {            
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+			
+		return arr;
+	}
+	
+	public ArrayList<ResponsibilitySubject> selectResponsibilitySubject(String memberID)
+	{
+		ArrayList<ResponsibilitySubject> arr = new ArrayList<ResponsibilitySubject>();
+		try
+        {
+			String selectQuery = "SELECT * FROM career where memberID = '" + memberID + "'";
+			
+            //질의를 할 Statement 만들기 
+            stmt = con.createStatement();
+            
+            rs = stmt.executeQuery(selectQuery); //조회 쿼리결과를 rs에 넣음
+            
+            System.out.println("--- 테이블 student 내용 조회 ---");
+            
+            //rs의 내용을 가져옴
+            while (rs.next())
+            {
+            	
+            	
+            	ResponsibilitySubject a = new ResponsibilitySubject() ;
+            	
+            	a.responsibilitySubject = rs.getString(1);
+            	a.memberID = rs.getString(2);
+
+            	arr.add(a);
+            }
+           
+            
+        }
+        catch (Exception e)
+        {            
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+			
+		return arr;
 	}
 	
 	public String login(String id, String password)

@@ -35,9 +35,6 @@
         
        session.setAttribute("login", null);
         
-        
-        
-       
     	if ( memberID != null )
     	{
     		 int type = memberControl.getMemberType(memberID);
