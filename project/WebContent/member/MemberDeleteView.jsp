@@ -251,25 +251,6 @@
 	 </header>
 	
 
-
-<%
-	int memberType = (int) session.getAttribute("login");
-	
-	if ( memberType == 0 )
-	{
-		nor = (project.member.NormalMemberData) session.getAttribute("member");
-	}
-	
-	else
-	{
-		em = (project.member.EmployeeData) session.getAttribute("member");
-	}
-	
-	mem = (project.member.MemberData) session.getAttribute("member");
-	
-	
-%>
-
 <h6> 교육센터 통합 운영관리 시스템 - 회원정보관리 - 회원 정보 삭제</h6>
 
 <h3>회원 정보 삭제</h3>
@@ -280,18 +261,39 @@
 		<legend> 회원탈퇴 </legend>
 		<table>
 		
+		<% 
+		if (isLogin == 0 ) 
+		{ %>
 			<tr>
-				<td>성명</td>
-				<td name=name ><%= nor.name %></td>
-			</tr>
+			<td>성명</td>
+			<td name=name ><%= nor.name %></td>
+		</tr>
+		<tr>
+			<td>회원 아이디</td>
+			<td name=ID><%= nor.ID %></td>
+		</tr>
+		<tr>
+			<td>현재 비밀번호</td>
+			<td><input type="password"  name=password></td>
+		</tr><%
+		} 
+		else {
+			%>
 			<tr>
-				<td>회원 아이디</td>
-				<td name=ID><%= nor.ID %></td>
-			</tr>
-			<tr>
-				<td>현재 비밀번호</td>
-				<td><input type="password"  name=password></td>
-			</tr>
+			<td>성명</td>
+			<td name=name ><%= em.name %></td>
+		</tr>
+		<tr>
+			<td>회원 아이디</td>
+			<td name=ID><%= em.ID %></td>
+		</tr>
+		<tr>
+			<td>현재 비밀번호</td>
+			<td><input type="password"  name=password></td>
+		</tr><%
+		}
+		%>
+			
 		</table>
 		<div align = right>
 			<input type="submit" id=memberDeleteBtn  class=myButton value="삭제" >

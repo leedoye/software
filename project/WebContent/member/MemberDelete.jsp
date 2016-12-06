@@ -34,7 +34,7 @@ if ( islogin == 0 )
 		
 		%>
 			<script>
-			alert("dnkdfanmdkf");
+			alert("회원삭제성공")
 			location.href="../main/mainView.jsp";
 			</script>
 		<%
@@ -52,13 +52,7 @@ if ( islogin == 0 )
 }
 else
 {
-	%>
-		<script>
-			alert("dnkdfanmdkf");
-			
-		</script>
 	
-	<%
 	em = (project.member.EmployeeData) session.getAttribute("member");
 	if ( password.equals(em.password) )
 	{
@@ -67,6 +61,7 @@ else
 		
 		%>
 			<script>
+			alert("직원정보삭제 성공");
 			location.href="../main/mainView.jsp";
 			</script>
 		<%
