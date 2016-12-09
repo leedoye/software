@@ -6,6 +6,7 @@
    <jsp:useBean id="em" class="project.member.EmployeeData" />
    <jsp:useBean id="nor" class="project.member.NormalMemberData" />
    <jsp:useBean id="mem" class="project.member.MemberData" />
+   
 <jsp:setProperty name="nor" property="*" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
